@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <!-- {{date | formatDate }} -->
+        {{prices}}
+    </div>
+
+    <script>
+        var handleMinNum = function(n){
+            return n < 10? "0"+n : n.toString()
+        }
+        var app = new Vue({
+            // element, 用于指定页面中已经存在的DOM元素，挂在到DOM中
+            el: '#app',
+            // 声明需要双向绑定的一个数据
+            data: {
+                date: new Date().toString().split(" ")[4],
+                package1:[
+                    {
+                        name: 'iphone',
+                        price: 7888,
+                        count: 3
+                    },
+                    {
+                        name: 'mac',
+                        price: 12888,
+                        count: 2
+                    }
+                ],
+                package2:[
+                    {
+                        name: 'iphone',
+                        price: 7888,
+                        count: 5
+                    },
+                    {
+                        name: 'mac',
+                        price: 12888,
+                        count: 1
+                    }
+                ]
+            },
+            mounted: function(){
+                let _this = this;
+                this.timer = setInterval(function(){
+                    _this.date = new Date().toString().split(" ")[4]
+                }, 1000)
+            },
+            beforeDestroyed: function(){
+                if(this.timer){
+                    clearInterval(this.timer)
+                }
+            },
+            filters:{
+                formatDate: function(value){
+                    let date = new Date()
+                    console.log(date)
+                    let year = date.getFullYear()
+                    let month = handleMinNum(date.getMonth()+1)
+                    let day = handleMinNum(date.getDay())
+                    let hour = handleMinNum(date.getHours())
+                    let second = handleMinNum(date.getSeconds())
+                    let minute = handleMinNum(date.getMinutes())
+                    return `${year}--${month}--${day}--${hour}--${minute}--${second}`
+
+                }
+            },
+            computed:{
+                prices: function(){
+                    let totalPrice = 0;
+                    for(let i = 0; i < this.package1.length; i++){
+                        totalPrice += this.package1[i].price * this.package1[i].count
+                    }
+                    for(let i = 0; i < this.package2.length; i++){
+                        totalPrice += this.package2[i].price * this.package2[i].count
+                    }
+                    return totalPrice
+                }
+            }
+        });
+    </script>
+</body>
+</html>
