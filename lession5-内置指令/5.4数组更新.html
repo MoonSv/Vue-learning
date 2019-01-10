@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul,
+        ol {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        包含book的数组：
+        {{ containsBook }}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                membersInSpark: [
+                    'Pain',
+                    'Itaki',
+                    'redisbook',
+                    'Daitus',
+                    'handbook'
+                ],
+                singers: {
+                    'name1': "林俊杰",
+                    'name2': "周杰伦",
+                    'name3': "蔡依林"
+                }
+            },
+            computed: {
+                containsBook: function () {
+                    
+                    return this.membersInSpark.filter(function(item){
+                        
+                        return item.match(/book/)
+                    })
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

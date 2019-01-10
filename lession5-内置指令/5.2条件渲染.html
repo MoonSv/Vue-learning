@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="type==='name'">
+            <input type="text" placeholder="name">
+        </div>
+        <div v-else-if="type==='password'">
+            <input type="text" placeholder="password">
+        </div>
+        <button @click="toggleType" v-if="type==='password'">to Name</button>
+        <button @click="toggleType" v-else>to Password</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                type: 'name'
+            },
+            methods: {
+                toggleType: function(){
+                    this.type = this.type === 'name'? 'password' : 'name'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

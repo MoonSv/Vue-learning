@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul, ol{
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <!-- v-for遍历数组 -->
+
+            <li v-for="name in membersInSpark">
+                {{name}}
+            </li>
+            <hr>
+            <p>取出index：（value， index）</p>
+            <li v-for="(name, index) in membersInSpark">
+                {{orderSuffix(index+1)}}--{{name}}
+            </li>
+            <hr>
+            <p>v-for遍历json</p>
+            <li v-for="value in singers">
+                {{value}}
+            </li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                membersInSpark: [
+                    'Pain',
+                    'Itaki',
+                    'Daitus'
+                ],
+                singers: {
+                    'name1': "林俊杰",
+                    'name2': "周杰伦",
+                    'name3': "蔡依林"
+                }
+            },
+            methods:{
+                orderSuffix: function(v){
+                    if(v === 1){
+                        return '1st'
+                    } else if (v === 2){
+                        return '2nd'
+                    } else {
+                        return v + 'th'
+                    }
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

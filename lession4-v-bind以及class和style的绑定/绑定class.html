@@ -10,11 +10,33 @@
         .btnClass{
             background-color: red;
         }
+        .blackbg{
+            height: 100px;
+            width: 100px;
+            background-color: #000;
+        }
+        .addborder{
+            border: 1px solid blueviolet;
+            border-radius: 10px;
+        }
+        .boxshadow{
+            box-shadow: 0 0 10px;
+        }
+        .c1{
+            height: 100px;
+            width: 200px;
+            background-color: darkblue;
+        }
+        .c2{
+            border: 10px solid orange;
+        }
     </style>
 </head>
 <body>
     <div id="app" class="">
         <button :class="{btnClass: isRed}" @click="changeColor">Change color!</button>
+        <div :class="[class1, class2, class3]"></div>
+        <div :class="[{c1: isC1Active}, {c2: isC2Active}]"></div>
     </div>
     <script>
         var app = new Vue({
@@ -23,7 +45,12 @@
             // 声明需要双向绑定的一个数据
             data: {
                 msg: 'hello',
-                isRed: true
+                isRed: true,
+                class1: 'blackbg',
+                class2: 'addborder',
+                class3: 'boxshadow',
+                isC1Active: true,
+                isC2Active: false
             },
             computed:{
                 // 计算属性默认用法是getter函数

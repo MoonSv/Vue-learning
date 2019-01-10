@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .test{
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        用stop阻止冒泡
+        <div @click="divClick" :class="test">
+            <button @click.stop="btnClick">click me</button>
+        </div>
+        <hr>
+        prevent的用法<br>
+        表单默认每次提交时都会刷新页面<br>
+        用prevent可以避免刷新<br>
+        和event.preventDefault是一样的
+        <form action="" @click.prevent="handleSubmit">
+            <button type="submit">submit</button>
+        </form>
+        <hr>
+        self的用法<br>
+        <div @click.self="divClick" :class="test">
+            <button @click="btnClick">click me</button>
+        </div>
+        <hr>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello',
+                test: "test"
+            },
+            methods: {
+                divClick: function () {
+                    alert('You have clicked the div')
+                },
+                btnClick: function () {
+                    alert('You have clicked the button')
+                },
+                handleSubmit: function () {
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

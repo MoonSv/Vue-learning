@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .test{
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        v-model的用法：<br>
+        <input type="text" v-model="value"> <br>
+        {{value}}
+        <hr>
+        单选框 <br>
+        <input type="radio" name="name" id="" value="Jessie" v-model="checkName"> <br>
+        <input type="radio" name="name" id="" value="Louis" v-model="checkName"> <br>
+        <input type="radio" name="name" id="" value="Kevin" v-model="checkName"> <br>
+        <input type="radio" name="name" id="" value="Rayn" v-model="checkName"> <br>
+        {{checkName}}
+        <hr>
+        复选框 <br>
+        <input type="checkbox" name="name1" id="" value="Jessie" v-model="checks"> <br>
+        <input type="checkbox" name="name1" id="" value="Louis" v-model="checks"> <br>
+        <input type="checkbox" name="name1" id="" value="Kevin" v-model="checks"> <br>
+        <input type="checkbox" name="name1" id="" value="Rayn" v-model="checks"> <br>
+        {{checks}}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                value: '',
+                checkName: 'Jessie',
+                checks: []
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

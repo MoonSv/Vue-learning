@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="msg">
+        <app-component msg="hello ,this is the message from your father" v-bind:msg="msg"></app-component>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script>
+        // 全局注册组件
+        Vue.component('my-component', {
+            template: '<div>I am a component</div>'
+        })
+        let app = new Vue({
+            el: '#app',
+            data:{
+                msg: ''
+            },
+            // 局部注册组件
+            components: {
+                'app-component': {
+                    // 通过这里的定义可以识别到msg是一个从父组件传来的参数
+                    props: ['msg'],
+                    data: function(){
+                        return{
+                            count: 1
+                        }
+                    },
+                    template: '<h2 style="border: 1px solid red">{{msg}}</h2>'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
