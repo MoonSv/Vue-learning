@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        Your balance: {{abc}}
+        {{def}}
+        <!-- <child-component @change="updateBalance"></child-component> -->
+        <child-component :b="abc" v-model="abc"></child-component>
+        <child-component :b="def" v-model="def"></child-component>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script>
+        Vue.component('child-component', {
+            props:['b'],
+            template: 
+            `
+            <div>
+                <button @click="increaseBalcence">+100</button>
+                <button @click="decreaseBalcence">-100</button>
+            </div>
+            `,
+            data:function(){
+                return {balance: this.b}
+            },
+            methods:{
+                increaseBalcence: function(){
+                    this.balance += 100
+                    // this.$emit('change', this.balance)
+                    this.$emit('input', this.balance)
+                },
+                decreaseBalcence: function(){
+                    this.balance -= 100
+                    this.$emit('input', this.balance)
+                }
+            }
+        })
+        let app = new Vue({
+            el: '#app',
+            data: {
+                // balance: 5000,
+                abc: 5000,
+                def: 1000
+            },
+            // methods: {
+            //     updateBalance: function(newValue){
+            //         this.balance = newValue
+            //     }
+            // }
+        })
+    </script>
+
+</body>
+
+</html>

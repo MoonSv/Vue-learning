@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <app-components :a="a" :b="b" :c="c" :d="d">
+
+        </app-components>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                a: "abc",
+                b: 123,
+                c: true,
+                d: 99
+            },
+            components: {
+                'app-components': {
+                    props: {
+                        a: String,
+                        b: [String, Number],
+
+                        // // 必须是布尔类型， 默认是true
+                        c: {
+                            type: Boolean,
+                            default: true
+                        },
+                        d: {
+                            // validator是一个验证函数
+                            validator: function (value) {
+                                return value < 10
+                            }
+                        }
+                    },
+                    template: `
+                    <div>{{a}}</div>
+                    
+                    `
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
