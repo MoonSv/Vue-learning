@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box-class{
+            height: 100px;
+            background-color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">        
+        <app-component msg="hello ,this is the message from your father"></app-component>
+        <hr>
+        hi! 可以直接通过输入来改变下面方块的宽度哦！
+        width: <input type="text" placeholder="enter width" v-model="width">
+        <box-component :width="width"></box-component>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script>
+        // 全局注册组件
+        Vue.component('my-component', {
+            template: '<div>I am a component</div>'
+        })
+        let app = new Vue({
+            el: '#app',
+            data:{
+                msg: '',
+                boxClass: 'box-class',
+                width: 10
+            },
+            // 局部注册组件
+            components: {
+                'app-component': {
+                    // 通过这里的定义可以识别到msg是一个从父组件传来的参数
+                    props: ['msg'],
+                    data: function(){
+                        return{
+                            heihei: this.msg
+                        }
+                    },
+                    template: '<h2 style="border: 1px solid red">{{heihei}}</h2>'
+                },
+                'box-component': {
+                    props: ['width'],
+                    data: ()=>{
+                        return {
+                            
+                        }
+                    },
+                    computed: {
+                        style: function(){
+                            return{
+                                width: this.width + 'px',
+                                height: 100 + 'px',
+                                backgroundColor: 'purple'
+                            }
+                        }
+                    },
+                    template: `<div :style="style"></div>`
+                }
+            }
+        })
+    </script>
+</body>
+
+</html> 
