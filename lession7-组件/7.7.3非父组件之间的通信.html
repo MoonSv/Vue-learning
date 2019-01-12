@@ -10,8 +10,11 @@
 
 <body>
     <div id="app">
-        <a-component></a-component>
-        <b-component></b-component>
+        <a-component ref='a'></a-component>
+        <b-component ref='b'></b-component>
+        <button @click="getMessage">get msg from a</button>
+        Message from child:<br>
+        {{fromChild}}
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
     <script>
@@ -33,7 +36,12 @@
             template: `
             <p>{{this.msg}}</p>
             `,
-
+            data: function(){
+                return {
+                    msg: 'msg from B component'
+                }
+            },
+            // 主要的要点是要绑定在自组件的created钩子上
             created: function () {
                 this.$parent.bus.$on('listen', (value) => {
                     alert(value)
@@ -43,7 +51,13 @@
         let app = new Vue({
             el: '#app',
             data: {
-                bus: new Vue()
+                bus: new Vue(),
+                fromChild: null
+            },
+            methods: {
+                getMessage: function(){
+                    this.fromChild = this.$refs.a.msg;
+                }
             }
         })
     </script>
